@@ -1,0 +1,6 @@
+[Unit]
+Description=Wallpaper changer
+
+[Service]
+Type=oneshot
+ExecStart=__PYTHON__ __SCRIPT__ --next
