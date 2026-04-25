@@ -75,7 +75,7 @@ class Gnome(WindowManager):
         return value
 
 
-def save_images_to_json(base_path="~/images", json_path="images.json"):
+def save_images_to_json(base_path="~/images", json_path="~/images.json"):
     gnome = Gnome()
     images = gnome.collect_images(base_path)
 
@@ -87,7 +87,7 @@ def save_images_to_json(base_path="~/images", json_path="images.json"):
     return images
 
 
-def load_images_from_json(json_path="images.json"):
+def load_images_from_json(json_path="~/images.json"):
     json_path = os.path.expanduser(json_path)
 
     if not os.path.exists(json_path):
@@ -97,7 +97,7 @@ def load_images_from_json(json_path="images.json"):
         return json.load(f)
 
 
-def load_or_refresh_images(base_path="~/images", json_path="images.json"):
+def load_or_refresh_images(base_path="~/images", json_path="~/images.json"):
     json_path = os.path.expanduser(json_path)
 
     if not os.path.exists(json_path):
