@@ -130,6 +130,18 @@ def set_next_wallpaper():
     with open(state_file, "w") as f:
         json.dump({"index": index}, f)
 
+def detect_manager():
+    de = os.environ.get("XDG_CURRENT_DESKTOP", "").lower()
+
+    if "gnome" in de:
+        return "gnome"
+
+def choose_manager():
+    if detect_manager() == "gnome":
+        return Gnome()
+    else:
+        print("program can't identify your window manager! please send issue to project! https://github.com/arsyhiy/wallpaperchanger")
+        raise NotImplemented
 
 def main():
     parser = argparse.ArgumentParser(
@@ -144,14 +156,15 @@ def main():
         "--refresh", action="store_true", help="refresh the list of images"
     )
 
-    gnome = Gnome()
+    # gnome = Gnome()
+    manager = choose_manager()
     args = parser.parse_args()
 
     if args.next:
         set_next_wallpaper()
 
     elif args.default:
-        gnome.set_default()
+        manager.set_default()
 
     elif args.refresh:
         images = save_images_to_json()
