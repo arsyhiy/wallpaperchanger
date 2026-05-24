@@ -1,9 +1,10 @@
 [Unit]
-Description=Run wallpaper changer periodically
+Description=Wallpaper changer timer
 
 [Timer]
-OnBootSec=60min
-OnUnitActiveSec=60min
+OnBootSec=2min
+OnUnitActiveSec=10min
+Persistent=true
 
 [Install]
 WantedBy=timers.target

@@ -1,6 +1,16 @@
 [Unit]
 Description=Wallpaper changer
+After=default.target
 
 [Service]
 Type=oneshot
-ExecStart=__PYTHON__ __SCRIPT__ --next
+
+WorkingDirectory=__WORKDIR__
+
+ExecStart=__PYTHON__ -m wallpaperchanger.main --next
+
+Nice=10
+IOSchedulingClass=idle
+
+NoNewPrivileges=true
+PrivateTmp=true
