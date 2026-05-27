@@ -5,12 +5,19 @@ After=default.target
 [Service]
 Type=oneshot
 
-WorkingDirectory=__WORKDIR__
+WorkingDirectory=/home/arsen/wallpaperchanger
 
-ExecStart=__PYTHON__ -m wallpaperchanger.main --next
+ExecStart=/home/arsen/wallpaperchanger/venv/bin/python -m wallpaperchanger.main --next
 
 Nice=10
 IOSchedulingClass=idle
 
 NoNewPrivileges=true
 PrivateTmp=true
+
+[Install]
+WantedBy=default.target
+
+[Timer]
+OnUnitActiveSec=5min
+Persistent=true
