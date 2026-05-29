@@ -1,13 +1,20 @@
-[project.scripts]
-wallpaperchanger = "wallpaperchanger.main:main"
-
-[build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
-
 [project]
 name = "wallpaperchanger"
-version = "0.1.0"
+wallpaperchanger = "wallpaperchanger.main:main"
+version = "0.01"
+description = "wallpaper Ccollage mover"
+authors = [
+    {name = "arsyhiy",email = "arsyhiy32@gmail.com"}
+]
+license = "MIT"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "black (>=26.5.1,<27.0.0)",
+    "pytest (>=9.0.3,<10.0.0)"
+]
 
-[tool.setuptools]
-packages = ["wallpaperchanger"]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

@@ -1,7 +1,6 @@
 from wallpaperchanger.WindowManager import WindowManager
 
 import subprocess
-import os
 
 
 class Gnome(WindowManager):

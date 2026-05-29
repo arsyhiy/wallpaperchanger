@@ -1,166 +1,167 @@
-# #перпеписать файл
-#
-#
-#
-# #!/usr/bin/env bash
-# set -e
-# #
-# # echo "📦 Installing wallpaper changer..."
-# #
-# PROJECT_DIR="$(cd "$(dirname "$0")" && pwd)"
-# SYSTEMD_DIR="$HOME/.config/systemd/user"
-# LOCAL_BIN="$HOME/.local/bin"
-# #
-# # PYTHON_PATH="$(command -v python3)"
-# # SCRIPT_PATH="$PROJECT_DIR/wallpaperchanger/main.py"
-# #
-# # # --- проверки ---
-# # if [ -z "$PYTHON_PATH" ]; then
-# # 	echo "❌ python3 not found"
-# # 	exit 1
-# # fi
-# #
-# # if ! command -v systemctl &>/dev/null; then
-# # 	echo "❌ systemctl not found"
-# # 	exit 1
-# # fi
-# #
-# # # --- systemd ---
-# mkdir -p "$SYSTEMD_DIR"
-# #
-# # echo "⚙️ Creating systemd files..."
-# #
-# sed "s|__PYTHON__|$PYTHON_PATH|g; s|__SCRIPT__|$SCRIPT_PATH|g" \
-# 	"$PROJECT_DIR/systemd/wallpaper.service" \
-# 	>"$SYSTEMD_DIR/wallpaper.service"
-#
-# cp "$PROJECT_DIR/systemd/wallpaper.timer" \
-# 	"$SYSTEMD_DIR/wallpaper.timer"
-#
-# #echo "🔄 Reloading systemd..."
-# systemctl --user daemon-reload
-#
-# #echo "✅ Enabling timer..."
-# systemctl --user enable --now wallpaper.timer
-#
-# # # --- CLI ---
-# # echo "🔗 Setting up CLI..."
-# #
-# # chmod +x "$SCRIPT_PATH"
-# # mkdir -p "$LOCAL_BIN"
-# #
-# # ln -sf "$SCRIPT_PATH" "$LOCAL_BIN/wallpaperchanger"
-# #
-# # echo "✅ CLI installed to $LOCAL_BIN"
-# #
-# # # PATH check
-# # if [[ ":$PATH:" != *":$LOCAL_BIN:"* ]]; then
-# # 	echo ""
-# # 	echo "⚠️  Add this to your shell config (~/.bashrc or ~/.zshrc):"
-# # 	echo "export PATH=\"\$HOME/.local/bin:\$PATH\""
-# # fi
-# #
-# # # --- done ---
-# # echo ""
-# # echo "🎉 Installed! Wallpaper changer is running."
-# # echo ""
-# # echo "👉 Run:"
-# # echo "wallpaperchanger --next"
-# # echo ""
-# # echo "👉 Check timers:"
-# # echo "systemctl --user list-timers"
-# # echo ""
-# # echo "👉 Logs:"
-# # echo "journalctl --user -u wallpaper.service -f"
+перпеписать файл
+
 # #
 # #
 # #
-# #
-# #
-# #
-# # # #!/usr/bin/env bash
-# # # set -e
-# #
+# # #!/usr/bin/env bash
+# # set -e
+# # #
 # # # echo "📦 Installing wallpaper changer..."
-# #
-# # # PROJECT_DIR="$(cd "$(dirname "$0")" && pwd)"
-# # # SYSTEMD_DIR="$HOME/.config/systemd/user"
-# # # LOCAL_BIN="$HOME/.local/bin"
-# #
+# # #
+# # PROJECT_DIR="$(cd "$(dirname "$0")" && pwd)"
+# # SYSTEMD_DIR="$HOME/.config/systemd/user"
+# # LOCAL_BIN="$HOME/.local/bin"
+# # #
 # # # PYTHON_PATH="$(command -v python3)"
-# # # MODULE_NAME="wallpaperchanger.main"
-# #
+# # # SCRIPT_PATH="$PROJECT_DIR/wallpaperchanger/main.py"
+# # #
+# # # # --- проверки ---
 # # # if [ -z "$PYTHON_PATH" ]; then
 # # # 	echo "❌ python3 not found"
 # # # 	exit 1
 # # # fi
-# #
-# # # if ! command -v systemctl >/dev/null; then
+# # #
+# # # if ! command -v systemctl &>/dev/null; then
 # # # 	echo "❌ systemctl not found"
 # # # 	exit 1
 # # # fi
-# #
-# # # mkdir -p "$SYSTEMD_DIR"
-# #
+# # #
+# # # # --- systemd ---
+# # mkdir -p "$SYSTEMD_DIR"
+# # #
 # # # echo "⚙️ Creating systemd files..."
+# # #
+# # sed "s|__PYTHON__|$PYTHON_PATH|g; s|__SCRIPT__|$SCRIPT_PATH|g" \
+# # 	"$PROJECT_DIR/systemd/wallpaper.service" \
+# # 	>"$SYSTEMD_DIR/wallpaper.service"
 # #
-# # # sed \
-# # # 	-e "s|__PYTHON__|$PYTHON_PATH|g" \
-# # # 	-e "s|__WORKDIR__|$PROJECT_DIR|g" \
-# # # 	"$PROJECT_DIR/systemd/wallpaper.service" \
-# # # 	> "$SYSTEMD_DIR/wallpaper.service"
+# # cp "$PROJECT_DIR/systemd/wallpaper.timer" \
+# # 	"$SYSTEMD_DIR/wallpaper.timer"
 # #
-# # # cp \
-# # # 	"$PROJECT_DIR/systemd/wallpaper.timer" \
-# # # 	"$SYSTEMD_DIR/wallpaper.timer"
+# # #echo "🔄 Reloading systemd..."
+# # systemctl --user daemon-reload
 # #
-# # # systemctl --user daemon-reload
-# # # systemctl --user enable --now wallpaper.timer
+# # #echo "✅ Enabling timer..."
+# # systemctl --user enable --now wallpaper.timer
 # #
+# # # # --- CLI ---
 # # # echo "🔗 Setting up CLI..."
-# #
+# # #
+# # # chmod +x "$SCRIPT_PATH"
 # # # mkdir -p "$LOCAL_BIN"
+# # #
+# # # ln -sf "$SCRIPT_PATH" "$LOCAL_BIN/wallpaperchanger"
+# # #
+# # # echo "✅ CLI installed to $LOCAL_BIN"
+# # #
+# # # # PATH check
+# # # if [[ ":$PATH:" != *":$LOCAL_BIN:"* ]]; then
+# # # 	echo ""
+# # # 	echo "⚠️  Add this to your shell config (~/.bashrc or ~/.zshrc):"
+# # # 	echo "export PATH=\"\$HOME/.local/bin:\$PATH\""
+# # # fi
+# # #
+# # # # --- done ---
+# # # echo ""
+# # # echo "🎉 Installed! Wallpaper changer is running."
+# # # echo ""
+# # # echo "👉 Run:"
+# # # echo "wallpaperchanger --next"
+# # # echo ""
+# # # echo "👉 Check timers:"
+# # # echo "systemctl --user list-timers"
+# # # echo ""
+# # # echo "👉 Logs:"
+# # # echo "journalctl --user -u wallpaper.service -f"
+# # #
+# # #
+# # #
+# # #
+# # #
+# # #
+# # # # #!/usr/bin/env bash
+# # # # set -e
+# # #
+# # # # echo "📦 Installing wallpaper changer..."
+# # #
+# # # # PROJECT_DIR="$(cd "$(dirname "$0")" && pwd)"
+# # # # SYSTEMD_DIR="$HOME/.config/systemd/user"
+# # # # LOCAL_BIN="$HOME/.local/bin"
+# # #
+# # # # PYTHON_PATH="$(command -v python3)"
+# # # # MODULE_NAME="wallpaperchanger.main"
+# # #
+# # # # if [ -z "$PYTHON_PATH" ]; then
+# # # # 	echo "❌ python3 not found"
+# # # # 	exit 1
+# # # # fi
+# # #
+# # # # if ! command -v systemctl >/dev/null; then
+# # # # 	echo "❌ systemctl not found"
+# # # # 	exit 1
+# # # # fi
+# # #
+# # # # mkdir -p "$SYSTEMD_DIR"
+# # #
+# # # # echo "⚙️ Creating systemd files..."
+# # #
+# # # # sed \
+# # # # 	-e "s|__PYTHON__|$PYTHON_PATH|g" \
+# # # # 	-e "s|__WORKDIR__|$PROJECT_DIR|g" \
+# # # # 	"$PROJECT_DIR/systemd/wallpaper.service" \
+# # # # 	> "$SYSTEMD_DIR/wallpaper.service"
+# # #
+# # # # cp \
+# # # # 	"$PROJECT_DIR/systemd/wallpaper.timer" \
+# # # # 	"$SYSTEMD_DIR/wallpaper.timer"
+# # #
+# # # # systemctl --user daemon-reload
+# # # # systemctl --user enable --now wallpaper.timer
+# # #
+# # # # echo "🔗 Setting up CLI..."
+# # #
+# # # # mkdir -p "$LOCAL_BIN"
+# # #
+# # # # cat > "$LOCAL_BIN/wallpaperchanger" <<EOF
+# # # # #!/usr/bin/env bash
+# # # # cd "$PROJECT_DIR"
+# # # # exec "$PYTHON_PATH" -m $MODULE_NAME "\$@"
+# # # # EOF
+# # #
+# # # # chmod +x "$LOCAL_BIN/wallpaperchanger"
+# # #
+# # # # echo "✅ Installed"
 # #
-# # # cat > "$LOCAL_BIN/wallpaperchanger" <<EOF
-# # # #!/usr/bin/env bash
-# # # cd "$PROJECT_DIR"
-# # # exec "$PYTHON_PATH" -m $MODULE_NAME "\$@"
-# # # EOF
 # #
-# # # chmod +x "$LOCAL_BIN/wallpaperchanger"
 # #
-# # # echo "✅ Installed"
-#
-#
-#
 
 
-#!/usr/bin/env bash
-set -e
+# #!/usr/bin/env bash
+# set -e
 
-PROJECT_DIR="$(cd "$(dirname "$0")" && pwd)"
-SYSTEMD_DIR="$HOME/.config/systemd/user"
+# PROJECT_DIR="$(cd "$(dirname "$0")" && pwd)"
+# SYSTEMD_DIR="$HOME/.config/systemd/user"
 
-PYTHON_PATH="$PROJECT_DIR/venv/bin/python"
+# PYTHON_PATH="$PROJECT_DIR/venv/bin/python"
 
-mkdir -p "$SYSTEMD_DIR"
+# mkdir -p "$SYSTEMD_DIR"
 
-echo "Installing systemd service..."
+# echo "Installing systemd service..."
 
-sed \
-  -e "s|__WORKDIR__|$PROJECT_DIR|g" \
-  -e "s|__PYTHON__|$PYTHON_PATH|g" \
-  "$PROJECT_DIR/systemd/wallpaperchanger.service" \
-  > "$SYSTEMD_DIR/wallpaperchanger.service"
+# sed \
+#   -e "s|__WORKDIR__|$PROJECT_DIR|g" \
+#   -e "s|__PYTHON__|$PYTHON_PATH|g" \
+#   "$PROJECT_DIR/systemd/wallpaperchanger.service" \
+#   > "$SYSTEMD_DIR/wallpaperchanger.service"
 
-cp \
-  "$PROJECT_DIR/systemd/wallpaper.timer" \
-  "$SYSTEMD_DIR/wallpaper.timer"
+# cp \
+#   "$PROJECT_DIR/systemd/wallpaper.timer" \
+#   "$SYSTEMD_DIR/wallpaper.timer"
 
-systemctl --user daemon-reload
+# systemctl --user daemon-reload
 
-echo "Enabling timer..."
+# echo "Enabling timer..."
 
-systemctl --user enable --now wallpaper.timer
+# systemctl --user enable --now wallpaper.timer
 
-echo "Done."
+# echo "Done."

@@ -1,9 +1,8 @@
 [Unit]
-Description=Wallpaper changer timer
+Description=Run wallpaper changer every 1 hour
 
 [Timer]
-OnBootSec=2min
-OnUnitActiveSec=10min
+OnCalendar=hourly
 Persistent=true
 
 [Install]
