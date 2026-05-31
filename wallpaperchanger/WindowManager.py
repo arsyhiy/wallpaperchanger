@@ -1,7 +1,6 @@
 import os
 import json
 
-
 class WindowManager:
     "base class for window manager"
 
@@ -46,16 +45,22 @@ class WindowManager:
 
         return images
 
+
     def load_images_from_json(self, json_path="~/images.json"):
         json_path = os.path.expanduser(json_path)
 
-        if not os.path.exists(json_path):
-            raise FileNotFoundError("JSON файл не найден")
+        try:
+            with open(json_path, "r", encoding="utf-8") as f:
+                return json.load(f)
 
-        with open(
-            json_path, "r", encoding="utf-8"
-        ) as f:  # FIXME: надо обарачивать подобные вещи в try expect.
-            return json.load(f)
+        except FileNotFoundError:
+            raise FileNotFoundError(f"JSON файл не найден: {json_path}")
+
+        except json.JSONDecodeError as e:
+            raise ValueError(f"Некорректный JSON в файле {json_path}: {e}")
+
+        except OSError as e:
+            raise OSError(f"Ошибка при чтении файла {json_path}: {e}")
 
     def load_or_refresh_images(self, base_path="~/images", json_path="~/images.json"):
         json_path = os.path.expanduser(json_path)
@@ -97,5 +102,4 @@ class WindowManager:
             os.replace(tmp_file, state_file)
 
         except OSError as e:
-            # можно логировать, но не ломать программу
             print(f"Failed to write state file: {e}")

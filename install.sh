@@ -1,167 +1,84 @@
-перпеписать файл
+#!/usr/bin/env bash
+set -euo pipefail
 
-# #
-# #
-# #
-# # #!/usr/bin/env bash
-# # set -e
-# # #
-# # # echo "📦 Installing wallpaper changer..."
-# # #
-# # PROJECT_DIR="$(cd "$(dirname "$0")" && pwd)"
-# # SYSTEMD_DIR="$HOME/.config/systemd/user"
-# # LOCAL_BIN="$HOME/.local/bin"
-# # #
-# # # PYTHON_PATH="$(command -v python3)"
-# # # SCRIPT_PATH="$PROJECT_DIR/wallpaperchanger/main.py"
-# # #
-# # # # --- проверки ---
-# # # if [ -z "$PYTHON_PATH" ]; then
-# # # 	echo "❌ python3 not found"
-# # # 	exit 1
-# # # fi
-# # #
-# # # if ! command -v systemctl &>/dev/null; then
-# # # 	echo "❌ systemctl not found"
-# # # 	exit 1
-# # # fi
-# # #
-# # # # --- systemd ---
-# # mkdir -p "$SYSTEMD_DIR"
-# # #
-# # # echo "⚙️ Creating systemd files..."
-# # #
-# # sed "s|__PYTHON__|$PYTHON_PATH|g; s|__SCRIPT__|$SCRIPT_PATH|g" \
-# # 	"$PROJECT_DIR/systemd/wallpaper.service" \
-# # 	>"$SYSTEMD_DIR/wallpaper.service"
-# #
-# # cp "$PROJECT_DIR/systemd/wallpaper.timer" \
-# # 	"$SYSTEMD_DIR/wallpaper.timer"
-# #
-# # #echo "🔄 Reloading systemd..."
-# # systemctl --user daemon-reload
-# #
-# # #echo "✅ Enabling timer..."
-# # systemctl --user enable --now wallpaper.timer
-# #
-# # # # --- CLI ---
-# # # echo "🔗 Setting up CLI..."
-# # #
-# # # chmod +x "$SCRIPT_PATH"
-# # # mkdir -p "$LOCAL_BIN"
-# # #
-# # # ln -sf "$SCRIPT_PATH" "$LOCAL_BIN/wallpaperchanger"
-# # #
-# # # echo "✅ CLI installed to $LOCAL_BIN"
-# # #
-# # # # PATH check
-# # # if [[ ":$PATH:" != *":$LOCAL_BIN:"* ]]; then
-# # # 	echo ""
-# # # 	echo "⚠️  Add this to your shell config (~/.bashrc or ~/.zshrc):"
-# # # 	echo "export PATH=\"\$HOME/.local/bin:\$PATH\""
-# # # fi
-# # #
-# # # # --- done ---
-# # # echo ""
-# # # echo "🎉 Installed! Wallpaper changer is running."
-# # # echo ""
-# # # echo "👉 Run:"
-# # # echo "wallpaperchanger --next"
-# # # echo ""
-# # # echo "👉 Check timers:"
-# # # echo "systemctl --user list-timers"
-# # # echo ""
-# # # echo "👉 Logs:"
-# # # echo "journalctl --user -u wallpaper.service -f"
-# # #
-# # #
-# # #
-# # #
-# # #
-# # #
-# # # # #!/usr/bin/env bash
-# # # # set -e
-# # #
-# # # # echo "📦 Installing wallpaper changer..."
-# # #
-# # # # PROJECT_DIR="$(cd "$(dirname "$0")" && pwd)"
-# # # # SYSTEMD_DIR="$HOME/.config/systemd/user"
-# # # # LOCAL_BIN="$HOME/.local/bin"
-# # #
-# # # # PYTHON_PATH="$(command -v python3)"
-# # # # MODULE_NAME="wallpaperchanger.main"
-# # #
-# # # # if [ -z "$PYTHON_PATH" ]; then
-# # # # 	echo "❌ python3 not found"
-# # # # 	exit 1
-# # # # fi
-# # #
-# # # # if ! command -v systemctl >/dev/null; then
-# # # # 	echo "❌ systemctl not found"
-# # # # 	exit 1
-# # # # fi
-# # #
-# # # # mkdir -p "$SYSTEMD_DIR"
-# # #
-# # # # echo "⚙️ Creating systemd files..."
-# # #
-# # # # sed \
-# # # # 	-e "s|__PYTHON__|$PYTHON_PATH|g" \
-# # # # 	-e "s|__WORKDIR__|$PROJECT_DIR|g" \
-# # # # 	"$PROJECT_DIR/systemd/wallpaper.service" \
-# # # # 	> "$SYSTEMD_DIR/wallpaper.service"
-# # #
-# # # # cp \
-# # # # 	"$PROJECT_DIR/systemd/wallpaper.timer" \
-# # # # 	"$SYSTEMD_DIR/wallpaper.timer"
-# # #
-# # # # systemctl --user daemon-reload
-# # # # systemctl --user enable --now wallpaper.timer
-# # #
-# # # # echo "🔗 Setting up CLI..."
-# # #
-# # # # mkdir -p "$LOCAL_BIN"
-# # #
-# # # # cat > "$LOCAL_BIN/wallpaperchanger" <<EOF
-# # # # #!/usr/bin/env bash
-# # # # cd "$PROJECT_DIR"
-# # # # exec "$PYTHON_PATH" -m $MODULE_NAME "\$@"
-# # # # EOF
-# # #
-# # # # chmod +x "$LOCAL_BIN/wallpaperchanger"
-# # #
-# # # # echo "✅ Installed"
-# #
-# #
-# #
+echo "Installing wallpaper changer"
 
+# --- paths ---
+PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SYSTEMD_DIR="$HOME/.config/systemd/user"
 
-# #!/usr/bin/env bash
-# set -e
+# --- deps check ---
+if ! command -v systemctl &>/dev/null; then
+    echo "❌ systemctl not found"
+    exit 1
+fi
 
-# PROJECT_DIR="$(cd "$(dirname "$0")" && pwd)"
-# SYSTEMD_DIR="$HOME/.config/systemd/user"
+if ! command -v python3 &>/dev/null; then
+    echo "❌ python3 not found"
+    exit 1
+fi
 
-# PYTHON_PATH="$PROJECT_DIR/venv/bin/python"
+if ! command -v pipx &>/dev/null; then
+    echo "❌ pipx not found"
+    echo "Install: python3 -m pip install --user pipx && python3 -m pipx ensurepath"
+    exit 1
+fi
 
-# mkdir -p "$SYSTEMD_DIR"
+# --- install app FIRST ---
+echo "📦 Installing package via pipx..."
+pipx install . --force
 
-# echo "Installing systemd service..."
+# --- get installed python + script paths ---
+PYTHON_PATH="$(command -v python3)"
+SCRIPT_PATH="$(pipx list --short | grep wallpaperchanger || true)"
 
-# sed \
-#   -e "s|__WORKDIR__|$PROJECT_DIR|g" \
-#   -e "s|__PYTHON__|$PYTHON_PATH|g" \
-#   "$PROJECT_DIR/systemd/wallpaperchanger.service" \
-#   > "$SYSTEMD_DIR/wallpaperchanger.service"
+# fallback safe check
+if [ -z "$SCRIPT_PATH" ]; then
+    SCRIPT_PATH="wallpaperchanger"
+fi
 
-# cp \
-#   "$PROJECT_DIR/systemd/wallpaper.timer" \
-#   "$SYSTEMD_DIR/wallpaper.timer"
+# --- systemd ---
+mkdir -p "$SYSTEMD_DIR"
 
-# systemctl --user daemon-reload
+echo "⚙️ Creating systemd files..."
 
-# echo "Enabling timer..."
+escape_sed() {
+    printf '%s' "$1" | sed 's/[&|]/\\&/g'
+}
 
-# systemctl --user enable --now wallpaper.timer
+PYTHON_ESC=$(escape_sed "$PYTHON_PATH")
+SCRIPT_ESC=$(escape_sed "$SCRIPT_PATH")
 
-# echo "Done."
+sed \
+  "s|__PYTHON__|${PYTHON_ESC}|g; s|__SCRIPT__|${SCRIPT_ESC}|g" \
+  "$PROJECT_DIR/systemd/wallpaper.service" \
+  > "$SYSTEMD_DIR/wallpaper.service"
+
+cp -f "$PROJECT_DIR/systemd/wallpaper.timer" \
+      "$SYSTEMD_DIR/wallpaper.timer"
+
+# --- systemd reload ---
+echo "🔄 Reloading systemd..."
+systemctl --user daemon-reload
+
+echo "▶️ Enabling timer..."
+systemctl --user enable --now wallpaper.timer
+
+# --- verify ---
+if ! systemctl --user is-enabled wallpaper.timer &>/dev/null; then
+    echo "❌ Failed to enable timer"
+    exit 1
+fi
+
+# --- done ---
+echo ""
+echo "🎉 Installed successfully!"
+echo ""
+echo "👉 Run:"
+echo "wallpaperchanger --next"
+echo ""
+echo "👉 Check timers:"
+echo "systemctl --user list-timers"
+echo ""
+echo "👉 Logs:"
+echo "journalctl --user -u wallpaper.service -f"

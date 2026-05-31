@@ -6,15 +6,7 @@ import subprocess
 class Gnome(WindowManager):
     """Gnome implementation of WindowManager"""
 
-    # временное решение
-    @staticmethod
-    def get_default():
-        """search for first default_image"""
-
-        image = "file:///usr/share/backgrounds/gnome/adwaita-l.jpg"
-        return image
-
-    default_wallpaper = get_default()
+    default_wallpaper = "file:///usr/share/backgrounds/gnome/adwaita-l.jpg"
 
     def set_wallpaper(self, image):
 
