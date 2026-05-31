@@ -1,6 +1,7 @@
 import os
 import json
 
+
 class WindowManager:
     "base class for window manager"
 
@@ -44,7 +45,6 @@ class WindowManager:
             raise RuntimeError(f"Failed to write images cache: {json_path}") from e
 
         return images
-
 
     def load_images_from_json(self, json_path="~/images.json"):
         json_path = os.path.expanduser(json_path)
