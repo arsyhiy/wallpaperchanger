@@ -9,5 +9,6 @@ to do, only that you need to set wallpapers from a collection of images from
 time to time. And when I think about what this program should or could do, I call it experimentation.
  
 
-# future features
-- adding hyprpaper support
+# замеченные недочеты
+- надо продумать как должно быть рястягивание или центрование? короче бывает страно выглядит обои низкого разрешения или подобная вещь
+

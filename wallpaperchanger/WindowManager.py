@@ -23,6 +23,7 @@ class WindowManager:
     def collect_images(self, base_path="~/images"):
         base_path = os.path.expanduser(base_path)
 
+        # TODO: проверить наличие папки
         image_extensions = {".jpg", ".jpeg", ".png", ".bmp", ".gif", ".webp"}
         images = []
 
@@ -35,6 +36,8 @@ class WindowManager:
         return sorted(images)
 
     def save_images_to_json(self, base_path="~/images", json_path="~/images.json"):
+        # TODO: проверить наличие папки
+
         images = self.collect_images(base_path)
         json_path = os.path.expanduser(json_path)
 
@@ -47,6 +50,7 @@ class WindowManager:
         return images
 
     def load_images_from_json(self, json_path="~/images.json"):
+        # TODO: проверить наличие папки
         json_path = os.path.expanduser(json_path)
 
         try:
@@ -63,6 +67,8 @@ class WindowManager:
             raise OSError(f"Ошибка при чтении файла {json_path}: {e}")
 
     def load_or_refresh_images(self, base_path="~/images", json_path="~/images.json"):
+        # TODO: проверить наличие папки
+
         json_path = os.path.expanduser(json_path)
 
         if not os.path.exists(json_path):
