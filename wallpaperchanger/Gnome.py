@@ -47,3 +47,15 @@ class Gnome(WindowManager):
             return None
 
         return value
+
+    def set_wallpaper_zoom(self):
+        subprocess.run(
+           [
+                "gsettings",
+                "set",
+                "org.gnome.desktop.background",
+                "picture-options",
+                "zoom",
+            ],
+        check=True,
+)

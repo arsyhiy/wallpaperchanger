@@ -54,6 +54,7 @@ def main():
     elif args.refresh:
         images = manager.save_images_to_json()
         print(f"Updated: {len(images)} images")
+        manager.set_wallpaper_zoom()
 
 
 if __name__ == "__main__":
