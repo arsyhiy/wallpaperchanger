@@ -15,6 +15,3 @@ time to time. And when I think about what this program should or could do, I cal
 
 
 # вернусь к проектув 1 октября
-
-# todo
-- adding webp files
