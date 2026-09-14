@@ -18,3 +18,4 @@ time to time. And when I think about what this program should or could do, I cal
 
 # TODO:
 - [] кнопка остановить работу тоесть --stop
+- сделать gui управление
