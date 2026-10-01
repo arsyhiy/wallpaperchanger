@@ -40,6 +40,9 @@ cp -f "$PROJECT_DIR/systemd/wallpaper.timer" \
 echo "Reloading systemd"
 systemctl --user daemon-reload
 
+echo "Enabling wallpaper service"
+systemctl --user enable wallpaper.service
+
 echo "Enabling timer"
 systemctl --user enable --now wallpaper.timer
 

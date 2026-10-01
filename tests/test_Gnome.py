@@ -1,23 +1,23 @@
-# """
-# test_Gnome.py: testing a gnome class.
-# """
+"""
+test_Gnome.py: testing a gnome class.
+"""
 
-# import os
-# from urllib.parse import urlparse
+import os
+from urllib.parse import urlparse
 
-# # from unittest.mock import patch
-# # import pytest
-# #
-# # import subprocess
-# #
-# # import re
+from unittest.mock import patch
+import pytest
+
+import subprocess
+
+# import re
 
 
-# from wallpaperchanger.Gnome import Gnome
+from wallpaperchanger.Gnome import Gnome
 
-# # честно надо еще подумать нужно мне этот тест
-# # def test_is_default_image_start_with_uri():
-# #     assert Gnome.default_wallpaper.startswith("file://") == True
+# честно надо еще подумать нужно мне этот тест
+def test_is_default_image_start_with_uri():
+    assert Gnome.default_wallpaper.startswith("file://") == True
 
 
 # def test_is_default_image_available():

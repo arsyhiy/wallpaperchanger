@@ -1,5 +1,4 @@
 from wallpaperchanger.WindowManager import WindowManager
-
 import subprocess
 
 

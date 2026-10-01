@@ -6,13 +6,18 @@ import json
 import argparse
 
 from wallpaperchanger.Gnome import Gnome
+from wallpaperchanger.Hyprland import Hyprland
 
 
 def detect_manager():
     de = os.environ.get("XDG_CURRENT_DESKTOP", "").lower()
 
+    # TODO: может даже написать вввиде match конструкци
     if "gnome" in de:
         return "gnome"
+    elif "hyprland" in de:
+
+        return "hyprland"
 
     return None
 
@@ -22,6 +27,9 @@ def set_manager():
 
     if manager == "gnome":
         return Gnome()
+
+    if manager == "hyprland":
+        return Hyprland()
 
     raise NotImplementedError(
         "Window manager is not supported. "
@@ -54,7 +62,8 @@ def main():
     elif args.refresh:
         images = manager.save_images_to_json()
         print(f"Updated: {len(images)} images")
-        manager.set_wallpaper_zoom()
+        # manager.set_wallpaper_zoom()
+        manager.set_wallpaper(images)
 
 
 if __name__ == "__main__":
