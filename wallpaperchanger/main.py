@@ -12,22 +12,24 @@ import argparse
 from wallpaperchanger.WindowManager.Gnome import Gnome
 from wallpaperchanger.WindowManager.Hyprland import Hyprland
 
-def set_manager():
+
+def identify_manager():
+    """
+    identify what window manager user is using right now
+    """
 
     wm = os.environ.get("XDG_CURRENT_DESKTOP", "").lower()
 
-    # переписать ввиде match 
-
-    if wm == "gnome":
-        return Gnome()
-
-    if wm == "hyprland":
-        return Hyprland()
-
-    raise NotImplementedError(
-        "Window manager is not supported. "
-        "Please open an issue: https://github.com/arsyhiy/wallpaperchanger"
-    )
+    match wm:
+        case "gnome":
+            return Gnome()
+        case "hyprland":
+            return Hyprland()
+        case _:
+            raise NotImplementedError(
+                "Window manager is not supported. "
+                "Please open an issue: https://github.com/arsyhiy/wallpaperchanger"
+            )
 
 
 def main():
@@ -43,7 +45,7 @@ def main():
         "--refresh", action="store_true", help="refresh the list of images"
     )
 
-    manager = set_manager()
+    manager = identify_manager()
     args = parser.parse_args()
 
     if args.next:
