@@ -1,14 +1,7 @@
-#!/usr/bin/env python3
-
-# вообще имеет ли смысл писать shebang?
-
-# import subprocess
 import os
-
-# import json
 import argparse
 
-# all WindowManagers
+# WindowManager import section
 from wallpaperchanger.WindowManager.Gnome import Gnome
 from wallpaperchanger.WindowManager.Hyprland import Hyprland
 
