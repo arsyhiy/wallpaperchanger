@@ -1,34 +1,27 @@
 #!/usr/bin/env python3
 
-import subprocess
+# вообще имеет ли смысл писать shebang?
+
+# import subprocess
 import os
-import json
+
+# import json
 import argparse
 
-from wallpaperchanger.Gnome import Gnome
-from wallpaperchanger.Hyprland import Hyprland
-
-
-def detect_manager():
-    de = os.environ.get("XDG_CURRENT_DESKTOP", "").lower()
-
-    # TODO: может даже написать вввиде match конструкци
-    if "gnome" in de:
-        return "gnome"
-    elif "hyprland" in de:
-
-        return "hyprland"
-
-    return None
-
+# all WindowManagers
+from wallpaperchanger.WindowManager.Gnome import Gnome
+from wallpaperchanger.WindowManager.Hyprland import Hyprland
 
 def set_manager():
-    manager = detect_manager()
 
-    if manager == "gnome":
+    wm = os.environ.get("XDG_CURRENT_DESKTOP", "").lower()
+
+    # переписать ввиде match 
+
+    if wm == "gnome":
         return Gnome()
 
-    if manager == "hyprland":
+    if wm == "hyprland":
         return Hyprland()
 
     raise NotImplementedError(

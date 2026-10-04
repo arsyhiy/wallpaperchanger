@@ -1,3 +1,6 @@
+'''
+base class for window manager
+'''
 import os
 import json
 
