@@ -1,6 +1,7 @@
 import os
 import argparse
-import dearpygui.dearpygui as dpg
+
+import dearpygui.dearpygui as dpg  # pyright: ignore[reportMissingImports] классная вещь 
 
 # WindowManager import section
 from WindowManager.Gnome import Gnome
