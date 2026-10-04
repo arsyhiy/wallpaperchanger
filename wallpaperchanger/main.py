@@ -1,9 +1,10 @@
 import os
 import argparse
+import dearpygui.dearpygui as dpg
 
 # WindowManager import section
-from wallpaperchanger.WindowManager.Gnome import Gnome
-from wallpaperchanger.WindowManager.Hyprland import Hyprland
+from WindowManager.Gnome import Gnome
+from WindowManager.Hyprland import Hyprland
 
 
 def identify_manager():
@@ -25,33 +26,52 @@ def identify_manager():
             )
 
 
+# def main():
+#     parser = argparse.ArgumentParser(
+#         prog="wallpaperchanger",
+#         usage="%(prog)s [options]",
+#         description="wallpaper changer",
+#     )
+# 
+#     parser.add_argument("--next", action="store_true", help="Set next wallpaper")
+#     parser.add_argument("--default", action="store_true", help="Set default wallpaper")
+#     parser.add_argument(
+#         "--refresh", action="store_true", help="refresh the list of images"
+#     )
+# 
+#     manager = identify_manager()
+#     args = parser.parse_args()
+# 
+#     if args.next:
+#         manager.set_next_wallpaper()
+# 
+#     elif args.default:
+#         manager.set_default()
+# 
+#     elif args.refresh:
+#         images = manager.save_images_to_json()
+#         print(f"Updated: {len(images)} images")
+#         # manager.set_wallpaper_zoom()
+#         manager.set_wallpaper(images)
+
 def main():
-    parser = argparse.ArgumentParser(
-        prog="wallpaperchanger",
-        usage="%(prog)s [options]",
-        description="wallpaper changer",
-    )
+    dpg.create_context()
 
-    parser.add_argument("--next", action="store_true", help="Set next wallpaper")
-    parser.add_argument("--default", action="store_true", help="Set default wallpaper")
-    parser.add_argument(
-        "--refresh", action="store_true", help="refresh the list of images"
-    )
+    with dpg.window(label="Wallpaper Changer"):
+        dpg.add_text("Wallpaper Changer")
+        dpg.add_button(label="Next")
+        dpg.add_button(label="Previous")
 
-    manager = identify_manager()
-    args = parser.parse_args()
+        dpg.create_viewport(
+            title="Wallpaper Changer",
+            width=500,
+            height=300,
+        )
 
-    if args.next:
-        manager.set_next_wallpaper()
-
-    elif args.default:
-        manager.set_default()
-
-    elif args.refresh:
-        images = manager.save_images_to_json()
-        print(f"Updated: {len(images)} images")
-        # manager.set_wallpaper_zoom()
-        manager.set_wallpaper(images)
+        dpg.setup_dearpygui()
+        dpg.show_viewport()
+        dpg.start_dearpygui()
+        dpg.destroy_context()
 
 
 if __name__ == "__main__":

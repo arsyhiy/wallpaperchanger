@@ -1,10 +1,10 @@
 import subprocess
-from wallpaperchanger.WindowManager import WindowManager
+from WindowManager.BaseManager import BaseManager
 
 
 # NOTE:  на самом деле сделать  hyprland сложней чем для gnome тут больше деталей  
 
-class Hyprland(WindowManager):
+class Hyprland(BaseManager):
     """Hyprland implementation of WindowManager (via hyprpaper IPC)."""
 
     default_wallpaper = "/usr/share/backgrounds/gnome/adwaita-l.jpg"

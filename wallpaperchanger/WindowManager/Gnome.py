@@ -1,8 +1,8 @@
-from wallpaperchanger.WindowManager import WindowManager
+from WindowManager.BaseManager import BaseManager
 import subprocess
 
 
-class Gnome(WindowManager):
+class Gnome(BaseManager):
     """Gnome implementation of WindowManager"""
 
     default_wallpaper = "file:///usr/share/backgrounds/gnome/adwaita-l.jpg"

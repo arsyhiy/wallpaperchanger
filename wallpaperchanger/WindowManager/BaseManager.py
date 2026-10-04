@@ -5,7 +5,7 @@ import os
 import json
 
 
-class WindowManager:
+class BaseManager:
     "base class for window manager"
 
     default_wallpaper = None
