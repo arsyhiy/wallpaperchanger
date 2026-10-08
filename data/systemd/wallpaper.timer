@@ -1,9 +1,0 @@
-[Unit]
-Description=Run wallpaper changer every 1 hour
-
-[Timer]
-OnCalendar=hourly
-Persistent=true
-
-[Install]
-WantedBy=timers.target

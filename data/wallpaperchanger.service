@@ -1,0 +1,31 @@
+
+; [Unit]
+; Description=Wallpaper changer
+; After=default.target
+; 
+; [Service]
+; Type=oneshot
+; ExecStart=%h/.local/bin/wallpaperchanger --next
+; 
+; Nice=10
+; IOSchedulingClass=idle
+; 
+; NoNewPrivileges=true
+; PrivateTmp=true
+
+[Unit]
+Description=Wallpaper Changer Service
+After=default.target
+
+[Service]
+Type=simple
+ExecStart=wallpaperchanger-service
+
+Restart=on-failure
+RestartSec=5
+
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=default.target
