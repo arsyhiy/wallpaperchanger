@@ -1,3 +1,4 @@
+# старая версия запуска этой программы
 import os
 import argparse
 

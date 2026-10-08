@@ -1,33 +1,39 @@
 [project]
 name = "wallpaperchanger"
-version = "0.01"
+version = "0.01" # who cares
 description = "wallpaper collage mover"
 authors = [
     {name = "arsyhiy", email = "arsyhiy32@gmail.com"}
 ]
-license = "MIT"
-readme = "README.md"
+license = "MIT" # i don't care what you will do with mine code
+readme = "README.md" # read this thing you bastard!
 requires-python = ">=3.13"
 
 dependencies = [
+    "dearpygui>=2.3.1,<3.0.0"
+]
+
+[dependency-groups]
+dev = [
     "pytest>=9.0.3,<10.0.0",
-    "black>=26.5.1,<27.0.0",
-    "dearpygui (>=2.3.1,<3.0.0)"
+    "black>=26.5.1,<27.0.0"
 ]
 
 [project.scripts]
-wallpaperchanger = "wallpaperchanger.main:main"
+wallpaperchanger = "wallpaperchanger.gui.main:main"
+wallpaperchanger-service = "wallpaperchanger.service.main:main"
 
 [build-system]
 requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
+where = ["src"]
 include = ["wallpaperchanger*"]
-exclude = ["systemd*"]
 
 [tool.pytest.ini_options]
-pythonpath = ["."]
+
+pythonpath = ["src"]
 
 [tool.black]
 target-version = ["py313"]
